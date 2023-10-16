@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnimatedPlayerController : MonoBehaviour
@@ -10,6 +11,7 @@ public class AnimatedPlayerController : MonoBehaviour
 
     private float horizontalInput;
     public float turnSpeed;
+    public ParticleSystem dirt;
 
     //Jumping Variables
     private Rigidbody rb;
@@ -58,6 +60,15 @@ public class AnimatedPlayerController : MonoBehaviour
             animator.SetTrigger("shoot");
         }
 
+        if (verticalInput > 0 && !dirt.isPlaying)
+        {
+            dirt.Play();
+        }
+        else if (verticalInput <= 0)
+        {
+            dirt.Stop();
+        }
+
 
     }
 
@@ -67,6 +78,7 @@ public class AnimatedPlayerController : MonoBehaviour
         {
             isOnGround = true;
             animator.SetBool("isOnGround", isOnGround);
+
         }
     }
 }
